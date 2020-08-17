@@ -11,5 +11,5 @@ Infelizmente o Google Meet não tem a opção de Push To Talk por padrão, por i
 # how to use:
 é possivel mudar configurações, como qual tecla é usada para ativar microfone, e se a aplicação deve tocar sons.
 Dentro de uma reunião no Meet, configurada inicialmete com o microfone desligado e atalho de ativação/desativação padrão (Ctrl + D), é possivel controlar a ativação do microfone ao apertar a tecla programada para isso, que por padrão é ' * '.
-Todas as configurações ficam salvas no arquivo '*'configs_file.json'*'
+Todas as configurações dessa aplicação ficam salvas no arquivo '*'configs_file.json'*'
  
