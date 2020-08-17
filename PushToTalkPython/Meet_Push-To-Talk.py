@@ -2,9 +2,11 @@ import keyboard
 import time
 import playsound
 import json
+import datetime
 
 blEndOfExecutionKeyPressed = False
 blPushToTalkKeyPressed = False
+
 strEOEkey = 'ctrl + 0'
 strMuteUnmuteKeys = 'ctrl + d'
 configs_json_file = "configs_file.json"#por que criar uma variável pra representar um arquivo só pra complicar a compreenção do código? POR QUE SIM! (na verdade ajuda se quiser trocar o path do arquivo, seu nome, etc. mas pra um programa pequeno como esse realmente é desnecessário)
@@ -35,20 +37,20 @@ configs = deserialize(configs, configs_json_file)#configs salvas no arquivo json
 strPTTkey = configs["strPushToTalkKey"]
 blPlaySounds = configs["blPlaySounds"]#uso desnecessário de variáveis, sim, mas eu to com preguiça de mudar isso :/, sem falar que n usando essas variáveis, eu podia transformas as mudanças de confuguração abaixo em uma função, pra ser mais organizado.
 
-print('Mudar configurações? ("s" para sim) Atuais:')
+print('configurações atuais:')
 print('Som:',end=' ')
 if blPlaySounds: 
     print('ativado') 
 else: 
     print('desativado')
-print('Tecla Push To Talk:')
-print(strPTTkey)
+print('Tecla Push To Talk: "',strPTTkey,'"')
+print('Mudar configurações? ("s" para sim)')
 if input() == 's':
     #start of configurations
     #mudar tecla pushtotalk
     print('Mudar a tecla de Push To Talk? "s" para sim. ')
     if (input() == 's'):
-        time.sleep(0.8)
+        time.sleep(0.4)
         while True:
             print('Pressione a tecla desejada (ESC para cancelar)')
             while True:
@@ -99,7 +101,7 @@ while blEndOfExecutionKeyPressed == False:
     if keyboard.is_pressed(strPTTkey) == True and blPushToTalkKeyPressed == False:
         keyboard.press_and_release(strMuteUnmuteKeys)
         blPushToTalkKeyPressed = True
-        print('apertado')
+        print(datetime.datetime.now(),'MicOpen')
         if blPlaySounds:
             try:
                 playsound.playsound(press_play_sound_mp3_file,block=False)
@@ -109,7 +111,7 @@ while blEndOfExecutionKeyPressed == False:
     if blPushToTalkKeyPressed == True and keyboard.is_pressed(strPTTkey) == False: 
         keyboard.press_and_release(strMuteUnmuteKeys)
         blPushToTalkKeyPressed = False
-        print('desapertado')
+        print(datetime.datetime.now(),'MicClosed')
         if blPlaySounds:
             try:
                 playsound.playsound(unpress_play_sound_mp3_file,block=False)
